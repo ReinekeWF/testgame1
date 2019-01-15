@@ -4,8 +4,6 @@ import sys
 from pygame import gfxdraw as gfx
 import random
 
-#test änderrung
-
 hight = 480
 widht = 800
 moveX = 0
