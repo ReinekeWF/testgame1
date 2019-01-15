@@ -22,13 +22,16 @@ fenser = pygame.display.set_caption("Proto")
 fenser = pygame.display.set_mode((widht, hight), pygame.NOFRAME)
 
 farbe = [0,0,0]
+backgroundfarbe = [150,150,150]
 f = 0
 
-def background():
+def background(farbe):
     pos = 0
+    reduzierung = 0
     for color in range(150,0,-5):
         pos += hight/150*5
-        gfx.box(fenser,(0,pos - 17,widht,pos),(color + 100, color + 100, color + 100))
+        gfx.box(fenser,(0,pos - 17,widht,pos),(farbe[0] + 100 - reduzierung, farbe[1] + 100 - reduzierung, farbe[2] + 100 - reduzierung))
+        reduzierung += 5
 
 def speed(geschwindigkeit):
     if geschwindigkeit <-1:
@@ -71,6 +74,9 @@ while True:
             if event.key == pygame.K_DOWN:
                 for colorpos in range(3):
                     farbe[colorpos] = random.randrange(50,250)
+            if event.key == pygame.K_b:
+                for colorpos in range(3):
+                    backgroundfarbe[colorpos] = random.randrange(50,150)
             if event.key == pygame.K_UP and jump <= 1:
                 jump += 1
                 yUp -= 25
@@ -153,7 +159,7 @@ while True:
     #print(yUp)
 
     #gfx.box(fenser,((0,0),(800,480)),(150,150,150))
-    background()
+    background(backgroundfarbe)
     speed(yUp)
     fenser.blit(zeit(),(x,y))
     FpsLock.tick(60)
